@@ -189,23 +189,23 @@ vec4 Raytrace(Ray primary_ray){
 }
 
 void main(void){
-    triangle_data[0] = Triangle(vec3(4, 0, 2), vec3(4, 2, 2), vec3(2, 0, 2),vec3(0, 0, 1),0);//задняя стенка
-    triangle_data[1] = Triangle(vec3(2, 2, 2), vec3(2, 0, 2), vec3(4, 2, 2),vec3(0, 0, 1),0);
+    triangle_data[0] = Triangle(vec3(4, 0, 2), vec3(2, 0, 2), vec3(4, 2, 2),vec3(0, 0, 1),0);//задняя стенка
+    triangle_data[1] = Triangle(vec3(2, 2, 2), vec3(4, 2, 2), vec3(2, 0, 2),vec3(0, 0, 1),0);
 
-    triangle_data[2] = Triangle(vec3(2, 0, 2), vec3(2, 0, 0), vec3(4, 0, 2),vec3(1, 0, 0),0);//низ
-    triangle_data[3] = Triangle(vec3(4, 0, 0), vec3(4, 0, 2), vec3(2, 0, 0),vec3(1, 0, 0),0);
+    triangle_data[2] = Triangle(vec3(2, 0, 2), vec3(4, 0, 2), vec3(2, 0, 0),vec3(1, 0, 0),0);//низ
+    triangle_data[3] = Triangle(vec3(4, 0, 0), vec3(2, 0, 0), vec3(4, 0, 2),vec3(1, 0, 0),0);
 
-    triangle_data[4] = Triangle(vec3(2, 0, 2), vec3(2, 2, 2), vec3(2, 0, 0),vec3(0, 1, 0),0);//левый бок
-    triangle_data[5] = Triangle(vec3(2, 2, 0), vec3(2, 0, 0), vec3(2, 2, 2),vec3(0, 1, 0),0);
+    triangle_data[4] = Triangle(vec3(2, 0, 2), vec3(2, 0, 0), vec3(2, 2, 2),vec3(0, 1, 0),0);//левый бок
+    triangle_data[5] = Triangle(vec3(2, 2, 0), vec3(2, 2, 2), vec3(2, 0, 0),vec3(0, 1, 0),0);
 
-    triangle_data[6] = Triangle(vec3(2, 2, 0), vec3(2, 2, 2), vec3(4, 2, 0),vec3(1, 0, 0),0);//верхушка
-    triangle_data[7] = Triangle(vec3(4, 2, 2), vec3(4, 2, 0), vec3(2, 2, 2),vec3(1, 0, 0),0);
+    triangle_data[6] = Triangle(vec3(2, 2, 0), vec3(4, 2, 0), vec3(2, 2, 2),vec3(1, 0, 0),0);//верхушка
+    triangle_data[7] = Triangle(vec3(4, 2, 2), vec3(2, 2, 2), vec3(4, 2, 0),vec3(1, 0, 0),0);
 
-    triangle_data[8] = Triangle(vec3(2, 0, 0), vec3(2, 2, 0), vec3(4, 2, 0),vec3(0, 0, 1),0);//перед
-    triangle_data[9] = Triangle(vec3(4, 2, 0), vec3(4, 0, 0), vec3(2, 0, 0),vec3(0, 0, 1),0);
+    triangle_data[8] = Triangle(vec3(2, 0, 0), vec3(4, 2, 0), vec3(2, 2, 0),vec3(0, 0, 1),0);//перед
+    triangle_data[9] = Triangle(vec3(4, 2, 0), vec3(2, 0, 0), vec3(4, 0, 0),vec3(0, 0, 1),0);
 
-    triangle_data[10] = Triangle(vec3(4, 0, 0), vec3(4, 2, 0), vec3(4, 0, 2),vec3(0, 1, 0),0);//правый бок
-    triangle_data[11] = Triangle(vec3(4, 2, 2), vec3(4, 0, 2), vec3(4, 2, 0),vec3(0, 1, 0),0);
+    triangle_data[10] = Triangle(vec3(4, 0, 0), vec3(4, 0, 2), vec3(4, 2, 0),vec3(0, 1, 0),0);//правый бок
+    triangle_data[11] = Triangle(vec3(4, 2, 2), vec3(4, 2, 0), vec3(4, 0, 2),vec3(0, 1, 0),0);
    
     Ray ray=GenerateRay(camera);
     FragColor=Raytrace(ray);
