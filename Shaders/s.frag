@@ -49,7 +49,7 @@ uniform vec3 light_pos;
 layout(std430, binding=0) buffer SphereBuffer {
         Sphere sphere_data[];
 };
-Triangle triangle_data[12];
+Triangle triangle_data[48];
 
 Material material = Material(vec4(0.4,0.9,0.0,512.0));
 
@@ -90,9 +90,9 @@ bool intersect_triangle (Ray ray, vec3 v1, vec3 v2, vec3 v3, out float time ){
     vec3 N = cross(A, B);
     float RayDirection = dot(N, ray.direction);
 
-    if (abs(RayDirection) < 0.001)   return false;
+    if (abs(RayDirection) < EPSILON)   return false;
     float d = dot(N, v1);
-    float t = -1. * (dot(N, ray.origin) - d) / RayDirection;
+    float t = -1.0f * (dot(N, ray.origin) - d) / RayDirection;
 
     if (t < 0) return false;
     vec3 P = ray.origin + t * ray.direction;
@@ -191,22 +191,56 @@ vec4 Raytrace(Ray primary_ray){
 void main(void){
     triangle_data[0] = Triangle(vec3(4, 0, 2), vec3(2, 0, 2), vec3(4, 2, 2),vec3(0, 0, 1),0);//задняя стенка
     triangle_data[1] = Triangle(vec3(2, 2, 2), vec3(4, 2, 2), vec3(2, 0, 2),vec3(0, 0, 1),0);
-
     triangle_data[2] = Triangle(vec3(2, 0, 2), vec3(4, 0, 2), vec3(2, 0, 0),vec3(1, 0, 0),0);//низ
     triangle_data[3] = Triangle(vec3(4, 0, 0), vec3(2, 0, 0), vec3(4, 0, 2),vec3(1, 0, 0),0);
-
     triangle_data[4] = Triangle(vec3(2, 0, 2), vec3(2, 0, 0), vec3(2, 2, 2),vec3(0, 1, 0),0);//левый бок
     triangle_data[5] = Triangle(vec3(2, 2, 0), vec3(2, 2, 2), vec3(2, 0, 0),vec3(0, 1, 0),0);
-
     triangle_data[6] = Triangle(vec3(2, 2, 0), vec3(4, 2, 0), vec3(2, 2, 2),vec3(1, 0, 0),0);//верхушка
     triangle_data[7] = Triangle(vec3(4, 2, 2), vec3(2, 2, 2), vec3(4, 2, 0),vec3(1, 0, 0),0);
-
     triangle_data[8] = Triangle(vec3(2, 0, 0), vec3(4, 2, 0), vec3(2, 2, 0),vec3(0, 0, 1),0);//перед
     triangle_data[9] = Triangle(vec3(4, 2, 0), vec3(2, 0, 0), vec3(4, 0, 0),vec3(0, 0, 1),0);
-
     triangle_data[10] = Triangle(vec3(4, 0, 0), vec3(4, 0, 2), vec3(4, 2, 0),vec3(0, 1, 0),0);//правый бок
     triangle_data[11] = Triangle(vec3(4, 2, 2), vec3(4, 2, 0), vec3(4, 0, 2),vec3(0, 1, 0),0);
+
+    triangle_data[12] = Triangle(vec3(6, -2, 2), vec3(4, -2, 2), vec3(6, 0, 2),vec3(0, 0, 1),0);//задняя стенка
+    triangle_data[13] = Triangle(vec3(4, 0, 2), vec3(6, 0, 2), vec3(4, -2, 2),vec3(0, 0, 1),0);
+    triangle_data[14] = Triangle(vec3(4, -2, 2), vec3(6, -2, 2), vec3(4, -2, 0),vec3(1, 0, 0),0);//низ
+    triangle_data[15] = Triangle(vec3(6, -2, 0), vec3(4, -2, 0), vec3(6, -2, 2),vec3(1, 0, 0),0);
+    triangle_data[16] = Triangle(vec3(4, -2, 2), vec3(4, -2, 0), vec3(4, 0, 2),vec3(0, 1, 0),0);//левый бок
+    triangle_data[17] = Triangle(vec3(4, 0, 0), vec3(4, 0, 2), vec3(4, -2, 0),vec3(0, 1, 0),0);
+    triangle_data[18] = Triangle(vec3(4, 0, 0), vec3(6, 0, 0), vec3(4, 0, 2),vec3(1, 0, 0),0);//верхушка
+    triangle_data[19] = Triangle(vec3(6, 0, 2), vec3(4, 0, 2), vec3(6, 0, 0),vec3(1, 0, 0),0);
+    triangle_data[20] = Triangle(vec3(4, -2, 0), vec3(6, 0, 0), vec3(4, 0, 0),vec3(0, 0, 1),0);//перед
+    triangle_data[21] = Triangle(vec3(6, 0, 0), vec3(4, -2, 0), vec3(6, -2, 0),vec3(0, 0, 1),0);
+    triangle_data[22] = Triangle(vec3(6, -2, 0), vec3(6, -2, 2), vec3(6, 0, 0),vec3(0, 1, 0),0);//правый бок
+    triangle_data[23] = Triangle(vec3(6, 0, 2), vec3(6, 0, 0), vec3(6, -2, 2),vec3(0, 1, 0),0);
+
+    triangle_data[24] = Triangle(vec3(6, 2, 2), vec3(4, 2, 2), vec3(6, 4, 2),vec3(0, 0, 1),0);//задняя стенка
+    triangle_data[25] = Triangle(vec3(4, 4, 2), vec3(6, 4, 2), vec3(4, 2, 2),vec3(0, 0, 1),0);
+    triangle_data[26] = Triangle(vec3(4, 2, 2), vec3(6, 2, 2), vec3(4, 2, 0),vec3(1, 0, 0),0);//низ
+    triangle_data[27] = Triangle(vec3(6, 2, 0), vec3(4, 2, 0), vec3(6, 2, 2),vec3(1, 0, 0),0);
+    triangle_data[28] = Triangle(vec3(4, 2, 2), vec3(4, 2, 0), vec3(4, 4, 2),vec3(0, 1, 0),0);//левый бок
+    triangle_data[29] = Triangle(vec3(4, 4, 0), vec3(4, 4, 2), vec3(4, 2, 0),vec3(0, 1, 0),0);
+    triangle_data[30] = Triangle(vec3(4, 4, 0), vec3(6, 4, 0), vec3(4, 4, 2),vec3(1, 0, 0),0);//верхушка
+    triangle_data[31] = Triangle(vec3(6, 4, 2), vec3(4, 4, 2), vec3(6, 4, 0),vec3(1, 0, 0),0);
+    triangle_data[32] = Triangle(vec3(4, 2, 0), vec3(6, 4, 0), vec3(4, 4, 0),vec3(0, 0, 1),0);//перед
+    triangle_data[33] = Triangle(vec3(6, 4, 0), vec3(4, 2, 0), vec3(6, 2, 0),vec3(0, 0, 1),0);
+    triangle_data[34] = Triangle(vec3(6, 2, 0), vec3(6, 2, 2), vec3(6, 4, 0),vec3(0, 1, 0),0);//правый бок
+    triangle_data[35] = Triangle(vec3(6, 4, 2), vec3(6, 4, 0), vec3(6, 2, 2),vec3(0, 1, 0),0);
    
+    triangle_data[36] = Triangle(vec3(8, 0, 2), vec3(6, 0, 2), vec3(8, 2, 2),vec3(0, 0, 1),0);//задняя стенка
+    triangle_data[37] = Triangle(vec3(6, 2, 2), vec3(8, 2, 2), vec3(6, 0, 2),vec3(0, 0, 1),0);
+    triangle_data[38] = Triangle(vec3(6, 0, 2), vec3(8, 0, 2), vec3(6, 0, 0),vec3(1, 0, 0),0);//низ
+    triangle_data[39] = Triangle(vec3(8, 0, 0), vec3(6, 0, 0), vec3(8, 0, 2),vec3(1, 0, 0),0);
+    triangle_data[40] = Triangle(vec3(6, 0, 2), vec3(6, 0, 0), vec3(6, 2, 2),vec3(0, 1, 0),0);//левый бок
+    triangle_data[41] = Triangle(vec3(6, 2, 0), vec3(6, 2, 2), vec3(6, 0, 0),vec3(0, 1, 0),0);
+    triangle_data[42] = Triangle(vec3(6, 2, 0), vec3(8, 2, 0), vec3(6, 2, 2),vec3(1, 0, 0),0);//верхушка
+    triangle_data[43] = Triangle(vec3(8, 2, 2), vec3(6, 2, 2), vec3(8, 2, 0),vec3(1, 0, 0),0);
+    triangle_data[44] = Triangle(vec3(6, 0, 0), vec3(8, 2, 0), vec3(6, 2, 0),vec3(0, 0, 1),0);//перед
+    triangle_data[45] = Triangle(vec3(8, 2, 0), vec3(6, 0, 0), vec3(8, 0, 0),vec3(0, 0, 1),0);
+    triangle_data[46] = Triangle(vec3(8, 0, 0), vec3(8, 0, 2), vec3(8, 2, 0),vec3(0, 1, 0),0);//правый бок
+    triangle_data[47] = Triangle(vec3(8, 2, 2), vec3(8, 2, 0), vec3(8, 0, 2),vec3(0, 1, 0),0);
+
     Ray ray=GenerateRay(camera);
     FragColor=Raytrace(ray);
         

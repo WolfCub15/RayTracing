@@ -33,13 +33,13 @@ private:
 		QVector3D side;
 	};
 	Camera camera;
-	struct Triangle {
+	/*struct Triangle {
 		QVector3D v1;
 		QVector3D v2;
 		QVector3D v3;
 		QVector3D color;
 		int material_ind;
-	};
+	};*/
 
 protected:
 	void initializeGL() override;

@@ -110,7 +110,6 @@ ShaderWidget::~ShaderWidget() {
 	delete[] vert_data;
 }
 void ShaderWidget::keyPressEvent(QKeyEvent* event) {
-	update();
 	if (event->nativeVirtualKey() == Qt::Key_U) {
 		i++;
 		camera.pos.setY(i);
@@ -119,7 +118,16 @@ void ShaderWidget::keyPressEvent(QKeyEvent* event) {
 		i--;
 		camera.pos.setY(i);
 	}
-	if (event->nativeVirtualKey() == Qt::Key_I) {
+	if (event->nativeVirtualKey() == Qt::Key_T) {
+		i++;
+		camera.pos.setX(i);
+	}
+	if (event->nativeVirtualKey() == Qt::Key_R) {
+		i--;
+		camera.pos.setX(i);
+	}
+	if (event->nativeVirtualKey() == Qt::Key_I) {//лев
+		i = 0;
 		camera.pos.setX(-10);
 		camera.pos.setY(0);
 		camera.pos.setZ(0);
@@ -133,7 +141,8 @@ void ShaderWidget::keyPressEvent(QKeyEvent* event) {
 		camera.side.setY(0);
 		camera.side.setZ(-1);
 	}
-	if (event->nativeVirtualKey() == Qt::Key_L) {
+	if (event->nativeVirtualKey() == Qt::Key_L) {//низ
+		i = 0;
 		camera.pos.setX(0);
 		camera.pos.setY(-10);
 		camera.pos.setZ(0);
@@ -147,7 +156,8 @@ void ShaderWidget::keyPressEvent(QKeyEvent* event) {
 		camera.side.setY(0);
 		camera.side.setZ(0);
 	}
-	if (event->nativeVirtualKey() == Qt::Key_P) {
+	if (event->nativeVirtualKey() == Qt::Key_P) {//прав
+		i = 0;
 		camera.pos.setX(10);
 		camera.pos.setY(0);
 		camera.pos.setZ(0);
@@ -161,7 +171,8 @@ void ShaderWidget::keyPressEvent(QKeyEvent* event) {
 		camera.side.setY(0);
 		camera.side.setZ(-1);
 	}
-	if (event->nativeVirtualKey() == Qt::Key_O) {
+	if (event->nativeVirtualKey() == Qt::Key_O) {//верх
+		i = 0;
 		camera.pos.setX(0);
 		camera.pos.setY(10);
 		camera.pos.setZ(0);
@@ -175,7 +186,8 @@ void ShaderWidget::keyPressEvent(QKeyEvent* event) {
 		camera.side.setY(0);
 		camera.side.setZ(0);
 	}
-	if (event->nativeVirtualKey() == Qt::Key_K) {
+	if (event->nativeVirtualKey() == Qt::Key_K) {//зад
+		i = 0;
 		camera.pos.setX(0);
 		camera.pos.setY(0);
 		camera.pos.setZ(10);
@@ -189,7 +201,8 @@ void ShaderWidget::keyPressEvent(QKeyEvent* event) {
 		camera.side.setY(0);
 		camera.side.setZ(0);
 	}
-	if (event->nativeVirtualKey() == Qt::Key_Q) {
+	if (event->nativeVirtualKey() == Qt::Key_Q) {//перед
+		i = 0;
 		camera.pos.setX(0);
 		camera.pos.setY(0);
 		camera.pos.setZ(-10);
